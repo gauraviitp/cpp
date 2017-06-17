@@ -30,8 +30,8 @@ istream& operator>>(istream& is, Entry& e) {
     return is;
 }
 void print_book(const vector<Entry>& book){
-    for(int i = 0; i < book.size(); ++i){
-        cout << book[i] << '\n';
+    for(const auto& x : book){
+        cout << x << '\n';
     }
 }
 int main() {
