@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 using namespace std;
-struct Entry{
+struct Entry {
   string name;
   int number;
 };
@@ -39,5 +39,5 @@ int main() {
     phone_book.push_back(Entry{"Gaurav Choudhary", 12345});
     phone_book.push_back(Entry{"Megha Mallinath", 23456});
     print_book(phone_book);
-	return 0;
+    return 0;
 }
