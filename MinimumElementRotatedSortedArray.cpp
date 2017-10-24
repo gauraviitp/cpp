@@ -11,23 +11,20 @@ using namespace std;
 
 typedef vector<int> VI;
 
-// Returns index of the element if found 
-// Else returns -1.
-int binarySearch(VI v, int k) {
+// Returns the index of the minimum element in the array
+int findMinimum(VI& v) {
 	int low = 0, high = v.size() - 1;
 	while (low < high) {
 		int mid = (low + high) / 2;
-		if (v[mid] == k) {
-			return mid;
-		}
-		else if (v[mid] < k) {
-			low = mid + 1;
+		// check if the min present in the left half
+		if (v[mid] < v[high]) {
+			high = mid;
 		}
 		else {
-			high = mid - 1;
+			low = mid + 1;
 		}
 	}
-	return -1;
+	return low;
 }
 
 int main() {
@@ -42,10 +39,7 @@ int main() {
 		cin >> e;
 		v.push_back(e);
 	}
-	sort(v.begin(), v.end());
-	int k; // element to be searched
-	cin >> k;
-	int foundIndex = binarySearch(v, k);
-	cout << foundIndex << "\n";
+	int minIndex = findMinimum(v);
+	cout << minIndex << "\n";
 	return 0;
 }
