@@ -34,8 +34,8 @@ int MaxJminusI(VI& v) {
 	int lIndex = 0, rIndex = 0, maxDiff = ninf;
 	// Compare the leftMin and rightMax vectors and get the max difference
 	while (lIndex < v.size() && rIndex < v.size()) {
-		if(rIndex > lIndex) maxDiff = max(maxDiff, rIndex - lIndex);
 		if (lMin[lIndex] < rMax[rIndex]) {
+			if(rIndex > lIndex) maxDiff = max(maxDiff, rIndex - lIndex);
 			rIndex++;
 		}
 		if (rIndex < v.size() && lMin[lIndex] >= rMax[rIndex]) {
