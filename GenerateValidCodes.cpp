@@ -1,45 +1,54 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
+	// ConsoleApplication1.cpp : Defines the entry point for the console application.
+	//
 
-/*	Time begin - 3:47 PM
-	Time end -  PM
-*/
+	/*	Time begin - 5:31 AM
+		Time end -  AM
+		Desc: Print possible decodings.
+	*/
 
-#include "stdafx.h"
+	#include "stdafx.h"
+	#include <iostream>
+	#include <string>
+	#include <vector>
 
-#include <iostream>
-#include <string>
-#include <map>
+	using namespace std;
 
-using namespace std;
-typedef map<int, char> MIC;
+	void printDecodingsRecur(string& str, int pos, string& output) {
+		if (pos == str.size()) {
+			cout << output << " ";
+			return;
+		}
+		// First case: Consider one char
+		output.push_back('a' + atoi(str.substr(pos, 1).c_str()) - 1);
+		// Recur for the first case
+		printDecodingsRecur(str, pos + 1, output);
+		// Remove the char for backtracking with second case
+		output.pop_back();
 
-
-void generateValidCodes(const string& s, int pos, MIC& m, string& res) {
-	if (pos >= s.size()) {
-		cout << res << " ";
-		return;
+		// Second case: Consider two chars
+		// Check if two chars are available
+		if (pos + 1 < str.size()) {
+			int val = atoi(str.substr(pos, 2).c_str());
+			if (val >= 1 && val <= 26) {
+				// Insert into output string
+				output.push_back('a' + val - 1);
+				// Recur for the second case
+				printDecodingsRecur(str, pos + 2, output);
+				// Remove the char for backtracking
+				output.pop_back();
+			}
+		}
 	}
-	res.push_back(m[s[pos] - '0']);
-	generateValidCodes(s, pos + 1, m, res);
-	res.pop_back();
-	if (pos + 1 < s.size() && m.find(atoi(s.substr(pos, 2).c_str())) != m.end()) {
-		res.push_back(m[atoi(s.substr(pos, 2).c_str())]);
-		generateValidCodes(s, pos + 2, m, res);
-		res.pop_back();
-	}
-}
 
-int main() {
-	freopen("Input.txt", "r", stdin);
-	freopen("Output.txt", "w+", stdout);
-	string s;
-	cin >> s;
-	MIC m;
-	for (int i = 1; i <= 26; ++i) {
-		m[i] = 'a' + i - 1;
+	void printAllDecodings(string& str) {
+		string output;
+		printDecodingsRecur(str, 0, output);
 	}
-	string t;
-	generateValidCodes(s, 0, m, t);
-	return 0;
-}
+
+	int main() {
+		freopen("Input.txt", "r", stdin);
+		freopen("Output.txt", "w+", stdout);
+		string str;
+		cin >> str;
+		printAllDecodings(str);
+	}
