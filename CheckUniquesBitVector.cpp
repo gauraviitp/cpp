@@ -8,7 +8,7 @@ typedef vector<bool> VB;
 bool checkUniques(string s){
 	if (s.size() == 0) return true;
 	if (s.size() > 256) return false;
-	VB mask(255, false);
+	VB mask(256, false);
 	for (unsigned int i = 1; i < s.size(); ++i){
 		int val = s[i];
 		if (mask[val]) return false;
