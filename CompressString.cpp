@@ -1,5 +1,4 @@
 #include <cassert>
-#include <iostream>
 #include <string>
 
 using namespace std;
@@ -17,9 +16,8 @@ unsigned int countCompress(string& s){
 }
 
 string compress(string& str){
-	if (str.empty()
-		|| countCompress(str) >= str.size()){ 
-			return str;
+	if (str.empty() || countCompress(str) >= str.size()){ 
+		return str;
 	}
 	string res;
 	char prev = str[0];
