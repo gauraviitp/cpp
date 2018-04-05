@@ -8,7 +8,7 @@ public:
 };
 
 Node* getRightNode(Node *root){
-	while(root->rightSibling){
+	if(root->rightSibling){
 		if(root->rightSibling->left){
 			return root->rightSibling->left;
 		}
