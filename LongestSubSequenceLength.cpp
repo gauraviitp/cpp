@@ -6,7 +6,7 @@ using namespace std;
 typedef vector<int> VI;
 typedef vector<VI> VVI;
 
-int longestIncreasingSequenceLength(string& a, string& b){
+int longestSubsequenceLength(string& a, string& b){
 	VVI table = VVI(a.size(), VI(b.size(), 0));
 	for(int i = 0; i < (int)a.size(); ++i){
 		for(int j = 0; j < (int)b.size(); ++j){
@@ -34,9 +34,9 @@ int longestIncreasingSequenceLength(string& a, string& b){
 
 int main(){
 	string a = "Gaurav", b = "arv";
-	assert(longestIncreasingSequenceLength(a, b) == 3);
+	assert(longestSubsequenceLength(a, b) == 3);
 	a = "Gaurav", b = "Garav";
-	assert(longestIncreasingSequenceLength(a, b) == 5);
+	assert(longestSubsequenceLength(a, b) == 5);
 	a = "Gaurav", b = "Gaurav";
-	assert(longestIncreasingSequenceLength(a, b) == 6);
+	assert(longestSubsequenceLength(a, b) == 6);
 }
