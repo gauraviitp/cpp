@@ -5,7 +5,7 @@ using namespace std;
 
 bool binarySearch(vector<int>& v, int searchKey, int& index){
 	int low = 0, high = v.size() - 1;
-	while(low < high){
+	while(low <= high){
 		int mid = (low + high) / 2;
 		if(v[mid] == searchKey){
 			index = mid;
@@ -18,8 +18,8 @@ bool binarySearch(vector<int>& v, int searchKey, int& index){
 			high = mid - 1;
 		}
 	}
-	index = low;
-	return v[index] == searchKey;
+	index = (low == v.size()) ? v.size() - 1 : low;
+	return false;
 }
 
 void majorityElementRange(vector<int>& v, int& start, int& end){
