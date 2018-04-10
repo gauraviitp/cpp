@@ -18,9 +18,9 @@ public:
 };
 
 Node* add(Node *a, Node *b, int& carry){
-	if(a || b || carry){
-		Node *n = add(a ? a->next : nullptr, b ? b->next : nullptr, carry);
-		int sum = (a ? a->data : 0) + (b ? b->data : 0) + carry;
+	if(a && b){
+		Node *n = add(a->next, b->next, carry);
+		int sum = a->data + b->data + carry;
 		carry = sum/10;
 		sum = sum%10;
 		return new Node(sum, n);
@@ -45,18 +45,25 @@ void padLists(Node **a, Node **b){
 Node* add(Node *a, Node *b){
 	padLists(&a, &b);
 	int carry = 0;
-	return add(a, b, carry);
+	Node *res = add(a, b, carry);
+	if (carry == 0) {
+		return res;
+	}
+	else {
+		return new Node(carry, res);
+	}
 }
 
 int main(){
 	Node *a = new Node(4);
 	a->appendToTail(3);
-	Node *b = new Node(2);
+	a->appendToTail(7);
+	Node *b = new Node(6);
 	b->appendToTail(7);
 	b->appendToTail(5);
 	Node *res = add(a, b);
-	assert(res->data == 3);
+	assert(res->data == 1);
 	assert(res->next->data == 1);
-	assert(res->next->next->data == 8);
-	assert(res->next->next->next == nullptr);
+	assert(res->next->next->data == 1);
+	assert(res->next->next->next->data == 2);
 }
