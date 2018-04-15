@@ -44,7 +44,7 @@ bool onChessBoard(int n, int x, int y){
 // x +- 2 and y +- 1 // four more points  
 
 int countMinSteps(int n, const Point *start, const Point *end){
-	if (!onChessBoard(n, start->x, start->y)) return -1;
+    if (!onChessBoard(n, start->x, start->y)) return -1;
     if (!onChessBoard(n, end->x, end->y)) return -1;
     VVI dist(n, VI(n, -1));
     dist[start->x][start->y] = 0;
@@ -54,11 +54,11 @@ int countMinSteps(int n, const Point *start, const Point *end){
     while(!q.empty()){
         Point *curPos = q.front(); q.pop();
         //push the next 8 coordinates if not visited
-		if(*curPos == *end) return dist[curPos->x][curPos->y];
+	if(*curPos == *end) return dist[curPos->x][curPos->y];
 		
         int curx = curPos->x;
         int cury = curPos->y;
-		delete curPos;
+	delete curPos;
         
         for(int i = 0; i < 8; ++i){
             int nextx = curx + dx[i];
