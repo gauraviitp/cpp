@@ -29,9 +29,9 @@ public:
     int x;
     int y;
     Point(int px, int py) : x(px), y(py){}
-	bool operator==(const Point& other) const{
-		return x == other.x && y == other.y;
-	}
+    bool operator==(const Point& other) const{
+	return x == other.x && y == other.y;
+    }
 };
 
 bool onChessBoard(int n, int x, int y){
@@ -53,13 +53,14 @@ int countMinSteps(int n, const Point *start, const Point *end){
     int dy[] = { 2, 2, -2, -2, 1, -1,  1, -1};
     while(!q.empty()){
         Point *curPos = q.front(); q.pop();
-        //push the next 8 coordinates if not visited
+	//check if reached the destination
 	if(*curPos == *end) return dist[curPos->x][curPos->y];
 		
         int curx = curPos->x;
         int cury = curPos->y;
 	delete curPos;
         
+	//push the next 8 coordinates if not visited
         for(int i = 0; i < 8; ++i){
             int nextx = curx + dx[i];
             int nexty = cury + dy[i];
