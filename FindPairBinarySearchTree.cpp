@@ -46,7 +46,7 @@ bool Node::findPair(int sum){
 void testFindPair();
 
 int main(){
-	
+	testFindPair();
 }
 
 void testFindPair(){
@@ -85,7 +85,7 @@ void testFindPair(){
 	assert(root->findPair(21));
 	assert(root->findPair(22));
 	assert(root->findPair(23));
-	assert(root->findPair(24));
+	assert(root->findPair(25));
 	assert(!root->findPair(30));
 	assert(!root->findPair(0));
 }
