@@ -10,7 +10,7 @@ using namespace std;
 typedef vector<int> VI;
 typedef vector<VI> VVI;
 
-int lowestCommonSubsequence(const string& a, const string& b){
+int longestCommonSubsequence(const string& a, const string& b){
 	int sza = (int)a.length();
 	int szb = (int)b.length();
 	VVI table(sza + 1, VI(szb + 1, 0));
@@ -33,26 +33,26 @@ int lowestCommonSubsequence(const string& a, const string& b){
 int main(){
 	string a = "Gaurav";
 	string b = "arv";
-	assert(lowestCommonSubsequence(a, b) == 3);
+	assert(longestCommonSubsequence(a, b) == 3);
 	
 	string a1 = "";
 	string b1 = "arv";
-	assert(lowestCommonSubsequence(a1, b1) == 0);
+	assert(longestCommonSubsequence(a1, b1) == 0);
 	
 	string a2 = "Gaurav";
 	string b2 = "";
-	assert(lowestCommonSubsequence(a2, b2) == 0);
+	assert(longestCommonSubsequence(a2, b2) == 0);
 	
 	string a3 = "Gaurav";
 	string b3 = "Gaurav";
-	assert(lowestCommonSubsequence(a3, b3) == 6);
+	assert(longestCommonSubsequence(a3, b3) == 6);
 	
 	string a4 = "Gaurav";
 	string b4 = "aurav";
-	assert(lowestCommonSubsequence(a4, b4) == 5);
+	assert(longestCommonSubsequence(a4, b4) == 5);
 	
 	string a5 = "Gaura";
 	string b5 = "Gaurav";
-	assert(lowestCommonSubsequence(a5, b5) == 5);
+	assert(longestCommonSubsequence(a5, b5) == 5);
 }
 
