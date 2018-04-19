@@ -16,7 +16,7 @@ int getSum(VI& tree, int sa, int ea, int qs, int qe, int ct){
 	}
 	int mid = (sa + ea) / 2;
 	return 	getSum(tree, sa, mid, qs, qe, 2 * ct + 1) + 
-			getSum(tree, mid + 1, ea, qs, qe, 2 * ct + 2);
+		getSum(tree, mid + 1, ea, qs, qe, 2 * ct + 2);
 }
 
 
