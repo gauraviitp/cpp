@@ -8,6 +8,14 @@
 using namespace std;
 typedef vector<int> VI;
 
+template<typename T>
+class greaterOrEqual{
+public:
+	bool operator() (T &first, T &second){
+		return first >= second;
+	}
+};
+
 int upperIndex(int n){
 	int i = 1;
 	for(;i <= n; i *= 2);
@@ -68,13 +76,13 @@ bool testHeap(VI &v, T op){
 
 int main(){
 	VI v = {100, 200, 300, 1, 2, 3, 4, 10, 250, 350, 450, 20, 30, 1000, 0};
-	buildHeap(v, greater<int>());
-	assert(testHeap(v, greater<int>()));
+	buildHeap(v, greaterOrEqual<int>());
+	assert(testHeap(v, greaterOrEqual<int>()));
 	//Test popHeap
 	VI sorted(v);
-	sort(sorted.begin(), sorted.end(), greater<int>());
+	sort(sorted.begin(), sorted.end(), greaterOrEqual<int>());
 	for(int i = 0; i < (int)v.size(); ++i){
-		popHeap(v, greater<int>());
+		popHeap(v, greaterOrEqual<int>());
 		assert(sorted[i] == v.back());
 		v.pop_back();
 	}
