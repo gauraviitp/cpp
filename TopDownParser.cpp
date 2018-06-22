@@ -1,7 +1,8 @@
 // Top down parser
 
-// (+ a b)
+// (* 2 (+ 3 4)) = 14
 
+#include <cassert>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -80,11 +81,16 @@ int parse(Tokens &tokens){
 int main(){
 	Tokens tokens = {
 			new Token(leftParanthesis, "("),
-			new Token(operation, "+"),
-			new Token(number, "1"),
+			new Token(operation, "*"),
 			new Token(number, "2"),
+			new Token(leftParanthesis, "("),
+			new Token(operation, "+"),
+			new Token(number, "3"),
+			new Token(number, "4"),
+			new Token(rightParanthesis, ")"),
 			new Token(rightParanthesis, ")")
 		};
 	int result = parse(tokens);
 	cout << result << endl;
+	assert(result == 14);
 }
