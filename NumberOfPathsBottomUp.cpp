@@ -19,20 +19,19 @@ ll BottomUp(PI& dims){
 	}
 	VI dp(dims.first, 0);
 	dp[dims.first - 1] = 1; // bottom left initialized to 1
+	// lower left value
+	ll pathsLeftDown = 0;
 	for(int col = 1; col < dims.second; ++col){
-		VI tv(dp);
 		for(int row = dims.first - 1; row >= 0; --row){
-			ll& paths = tv[row];
+			ll paths = dp[row];
 			if(row - 1 >= 0){
 				paths += dp[row - 1];
 			}
 			if(row + 1 < dims.first){
-				paths += dp[row + 1];
+				paths += pathsLeftDown;
 			}
-		}
-		// update the dp vector with tv vector
-		for(int i = 0; i < (int)dp.size(); ++i){
-			dp[i] = tv[i];
+			pathsLeftDown = dp[row];
+			dp[row] = paths;
 		}
 	}
 	return dp[dims.first - 1];
