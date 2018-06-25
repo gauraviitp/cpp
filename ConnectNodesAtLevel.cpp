@@ -7,37 +7,31 @@ public:
 	Node(int d) : data(d), left(nullptr), right(nullptr), rightSibling(nullptr) {}
 };
 
-Node* getRightNode(Node *root){
-	if(root->rightSibling){
-		if(root->rightSibling->left){
-			return root->rightSibling->left;
+Node * getRightNode(Node *root){
+	root = root->rightSibling;
+	if(root){
+		if(root->left){
+			return root->left;
 		}
-		else if(root->rightSibling->right) {
-			return root->rightSibling->right;
+		else {
+			return root->right;
 		}
 	}
 	return nullptr;
 }
 
-
-/*
- * Fill the rightSibling pointers in top to bottom and
- * right to left manner.
- */ 
 void connectNodesAtLevel(Node *root){
-	if(!root){
+	if(!root) {
 		return;
-	}
-	if(root->left){
-		if(root->right){
-			root->left->rightSibling = root->right;
-		}
-		else {
-			root->left->rightSibling = getRightNode(root);
-		}
 	}
 	if(root->right){
 		root->right->rightSibling = getRightNode(root);
+		if(root->left){
+			root->left->rightSibling = root->right;
+		}
+	}
+	else if(root->left){
+		root->left->rightSibling = getRightNode(root);
 	}
 	connectNodesAtLevel(root->right);
 	connectNodesAtLevel(root->left);
