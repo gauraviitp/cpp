@@ -7,16 +7,19 @@ using namespace std;
 
 bool findSubarray(vector<int> &v, int sum){
 	if(v.empty()) return false;
-	int tail = 0;
-	int head = 1;
-	int cur_sum = v[tail];
-	if(cur_sum == sum) return true;
+	
+	int tail = 0, head = 0;
+	int curSum = 0;
+	
 	while(head < (int)v.size() && tail < (int)v.size()){
-		cur_sum += v[head];
-		while(cur_sum > sum && tail < head){
-			cur_sum -= v[tail++];
+		// Add element to current sum
+		curSum += v[head];
+		
+		while(curSum > sum && tail < head){
+			curSum -= v[tail++];
 		}
-		if(cur_sum == sum) return true;
+		
+		if(curSum == sum) return true;
 		++head;
 	}
 	return false;
