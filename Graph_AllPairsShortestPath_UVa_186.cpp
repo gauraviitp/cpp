@@ -5,6 +5,7 @@
 #include <limits>
 #include <map>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #define REP(i, a, b) for(int i = (a); i <= (b); ++i)
@@ -37,7 +38,28 @@ string format(string str, int len){
 	return str + string(len - str.size(), ' ');
 }
 
+string formatRight(string str, int len){
+	return string(len - str.size(), ' ') + str;
+}
+
+vector<string> parse(string str){
+	vector<string> parsedData;
+	while(true){
+		int pos = str.find(',');
+		if(!str.empty()){
+			parsedData.push_back(str.substr(0,pos));
+			str = str.substr(pos + 1);
+		}
+		if(pos == -1){
+			break;
+		}
+	}
+	return parsedData;
+}
+
 int main(){
+	//freopen("input.txt", "r", stdin);
+	//freopen("output.txt", "w+", stdout);
 	int dist;
 	map<string, int> m;
 	map<int, string> mr;
@@ -46,8 +68,9 @@ int main(){
 	int cityno = 0;
 	for(string line; getline(cin, line);){
 		if(line == "") break;
-		char source[20], dest[20], route[10];
-		sscanf(line.c_str(), "%[a-z A-Z0-9-_],%[a-z A-Z0-9-_],%[a-z A-Z0-9-_],%d", source, dest, route, &dist);
+		string source, dest, route;
+		auto v = parse(line);
+		source = v[0]; dest = v[1]; route = v[2]; dist = stoi(v[3]);
 		if(m.find(source) == m.end()) { m[source] = cityno; mr[cityno] = source; cityno++; }
 		if(m.find(dest) == m.end()) { m[dest] = cityno; mr[cityno] = dest; cityno++; }
 		// add both ways
@@ -63,8 +86,9 @@ int main(){
 	
 	for(string line; getline(cin, line);){
 		if(line == "") break;
-		char source[20], dest[20];
-		sscanf(line.c_str(), "%[a-z A-Z0-9-_],%[a-z A-Z0-9-_]", source, dest);
+		string source, dest;
+		auto v = parse(line);
+		source = v[0]; dest = v[1];
 		cout << "\n\n"; // two extra lines as specified in reqs
 		cout << format("From", 20) << " " 
 			 << format("To", 20) << " " 
@@ -80,7 +104,7 @@ int main(){
 			cout << format(mr[sourceCity], 20) << " " 
 				 << format(mr[nextCity], 20) << " " 
 				 << format(routes[sourceCity][nextCity], 10) << " " 
-				 << format(to_string(adjMatrix[sourceCity][nextCity]), 5) << "\n" ;
+				 << formatRight(to_string(adjMatrix[sourceCity][nextCity]), 5) << "\n" ;
 			sourceCity = nextCity;
 			nextCity = next[nextCity][m[dest]];
 		}
@@ -88,6 +112,6 @@ int main(){
 			 << string(5, '-') << "\n";
 		cout << string(42, ' ') 
 			 << format("Total", 10) << " "
-			 << format(to_string(adjMatrix[m[source]][m[dest]]), 5);
+			 << formatRight(to_string(adjMatrix[m[source]][m[dest]]), 5) << "\n";
 	}
 }
