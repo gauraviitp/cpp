@@ -1,6 +1,7 @@
 // UVa 10397 - Connect the campus
 
 #include <algorithm>
+#include <cassert>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
@@ -58,8 +59,12 @@ public:
 		return find(i) == find(j);
 	}
 	void unionSet(int i, int j){
-		set[find(i)] = find(j);
-		c--;
+		int pi = find(i);
+		int pj = find(j);
+		if(pi != pj){
+			set[find(i)] = find(j);
+			c--;
+		}
 	}
 };
 
@@ -79,8 +84,8 @@ double compute(VE& edges, int n, Set& set){
 }
 
 void read(){
-	//freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w+", stdout);
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w+", stdout);
 	while(true){
 		int n;
 		cin >> n;
@@ -117,4 +122,4 @@ void read(){
 
 int main(){
 	read();
-}
+}A
