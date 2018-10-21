@@ -22,12 +22,12 @@ ll solve(VVI& boxes, VVI& toys, int boxno, int toyno, VVI& dp){
 	if(type == toys[toyno][1]){
 		// find the total matches
 		ll maxMatch = 0;
-		ll totaltoys = 0;
 		ll totalboxes = 0;
 		for(int i = boxno; i < boxes.size(); ++i){
 			if(boxes[i][1] == type){
 				totalboxes += boxes[i][0];
 			}
+			ll totaltoys = 0;
 			for(int j = toyno; j < toys.size(); ++j){
 				if(toys[j][1] == type){
 					totaltoys += toys[j][0];
@@ -36,7 +36,8 @@ ll solve(VVI& boxes, VVI& toys, int boxno, int toyno, VVI& dp){
 				maxMatch = max(maxMatch, minMatch + solve(boxes, toys, i + 1, j + 1, dp));
 			}
 		}
-		return (dp[boxno][toyno] = maxMatch);
+		dp[boxno][toyno] = maxMatch;
+		return maxMatch;
 	}
 	// else if no match
 	else {
@@ -46,7 +47,8 @@ ll solve(VVI& boxes, VVI& toys, int boxno, int toyno, VVI& dp){
 		
 		// try skipping toys
 		maxMatch = max(maxMatch, solve(boxes, toys, boxno, toyno + 1, dp));
-		return (dp[boxno][toyno] = maxMatch);
+		dp[boxno][toyno] = maxMatch;
+		return maxMatch;
 	}
 }
 
